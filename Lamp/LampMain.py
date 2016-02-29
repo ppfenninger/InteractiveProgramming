@@ -34,7 +34,7 @@ class LampMain():
 		self.background.fill((200,0,0))
 
 		self.platformGroup = pygame.sprite.Group()
-		tempPlat = levelBuild.Platform((200,200))
+		tempPlat = levelBuild.Platform((0,0))
 		self.platformGroup.add(tempPlat)
 
 
