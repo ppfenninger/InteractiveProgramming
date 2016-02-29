@@ -5,6 +5,7 @@
 import os, sys
 import pygame
 from pygame.locals import *
+import levelBuild
 
 class LampMain():
 	"""This class initializes the game and contains the main loops of the game
@@ -32,12 +33,18 @@ class LampMain():
 		self.background = self.background.convert()
 		self.background.fill((200,0,0))
 
+		self.platformGroup = pygame.sprite.Group()
+		tempPlat = levelBuild.Platform((200,200))
+		self.platformGroup.add(tempPlat)
+
+
 		while 1:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()
 
 			self.window.blit(self.background, (0,0))
+			self.platformGroup.draw(self.window)
 			pygame.display.flip()
 
 
