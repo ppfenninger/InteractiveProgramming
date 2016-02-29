@@ -6,22 +6,34 @@ from pygame.locals import *
 if not pygame.font: print "You don't have any fonts"
 
 class Title():
-	
-	def __init__(self):
-		"""Creats the title screen"""
 
-		if pygame.font:
-			font = pygame.font.Font(None,36)
-			text = font.render("Press Enter To Begin!")
-			bigTitle = pygame.font.Font(none,48)
-			bigText = bigTitle.render
-			return [text, bigText]
-		
-		# if pygame.font:
-		# 		bigTitle = pygame.font.Font(none,48)
-		# 		bigText = bigTitle.render
-  #             font = pygame.font.Font(None, 36)
-  #             text = font.render("Pellets %s" % self.snake.pellets
-  #                                   , 1, (255, 0, 0))
-  #               textpos = text.get_rect(centerx=self.background.get_width()/2)
-  #               self.screen.blit(text, textpos)
+	def __init__(self, background, window):
+		self.background = background
+		self.window = window
+	
+	def titleScreen(self):
+		# Makes the title page and waits for user to continue
+		going = False
+		while not going:
+			if pygame.font and not going:
+				font = pygame.font.Font(None,36)
+				text = font.render("Press Enter To Begin!", 0, (255,255,255))
+
+				bigTitle = pygame.font.Font(None,48)
+				bigText = bigTitle.render("LAMP GAME", 0, (0,0,255))
+
+				smallTextpos = text.get_rect(centerx=self.background.get_width()/2,
+											centery=self.background.get_height()/2 +20)
+
+				bigTextpos = bigText.get_rect(centerx=self.background.get_width()/2,
+											centery=self.background.get_height()/2-20)
+
+				self.window.blit(bigText, bigTextpos)
+				self.window.blit(text, smallTextpos)
+				pygame.display.flip()
+				for event in pygame.event.get():
+					if event.type == pygame.QUIT:
+						sys.exit()
+					elif event.type == KEYUP:
+						if event.key == K_RETURN:
+							going = True

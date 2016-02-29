@@ -6,6 +6,8 @@ import os, sys
 import pygame
 from pygame.locals import *
 import levelBuild
+import text
+
 
 
 class LampMain():
@@ -26,6 +28,7 @@ class LampMain():
 		#creates the window
 		self.window = pygame.display.set_mode((self.width, self.height))
 
+
 	def MainLoop(self):
 		"""The main loop of the game"""
 
@@ -38,39 +41,15 @@ class LampMain():
 		# add the platforms to the stage
 		self.constructStage()
 
+		# makes the title page and waits for user to continue
+		# background and window are passed to it so they can alter the window
+		# and use background dimensions
+		waitScreen = text.Title(self.background, self.window)
+		waitScreen.titleScreen()
+
 		# continuously updates the game state
-		going = False
 		while 1:
-
-			# Makes the title page and waits for user to continue
-			if pygame.font and not going:
-
-				font = pygame.font.Font(None,36)
-				text = font.render("Press Enter To Begin!", 1, (255,255,255))
-
-				bigTitle = pygame.font.Font(None,48)
-				bigText = bigTitle.render("LAMP GAME", 1, (0,0,255))
-
-				smallTextpos = text.get_rect(centerx=self.background.get_width()/2,
-										centery=self.background.get_height()/2 +20)
-
-				bigTextpos = bigText.get_rect(centerx=self.background.get_width()/2,
-										centery=self.background.get_height()/2-20)
-
-				self.window.blit(bigText, bigTextpos)
-				self.window.blit(text, smallTextpos)
-				pygame.display.flip()
-				for event in pygame.event.get():
-					if event.type == pygame.QUIT:
-						sys.exit()
-					elif event.type == KEYDOWN:
-						if event.key == K_RETURN:
-							going = True
-
-				if not going:
-					continue 
-
-
+			
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()
@@ -98,6 +77,7 @@ class LampMain():
 				if x ==1 or y==1 or x==blocknumX-2 or y==blocknumY-2:
 					tempPlat = levelBuild.Platform((x*BLOCK_WIDTH,y*BLOCK_WIDTH))
 					self.platformGroup.add(tempPlat)
+
 
 
 
