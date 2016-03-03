@@ -7,6 +7,7 @@ import pygame
 from pygame.locals import *
 import levelBuild
 import text
+from lampSprite import Lamp
 
 
 
@@ -49,14 +50,27 @@ class LampMain():
 
 		# continuously updates the game state
 		while 1:
-			
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()
-
+				elif event.type == KEYDOWN:
+					if ((event.key == K_RIGHT)
+					or (event.key == K_LEFT)
+					or (event.key == K_UP)
+					or (event.key == K_DOWN)):
+						self.lamp.MoveKeyDown(event.key)
+				elif event.type == KEYUP:
+					if ((event.key == K_RIGHT)
+					or (event.key == K_LEFT)
+					or (event.key == K_UP)
+					or (event.key == K_DOWN)):
+						self.lamp.MoveKeyUp(event.key)
+						
+			self.lamp.update()
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
+			self.window.blit(self.lamp.image, self.lamp.rect)
 
 			# refreshes the display and makes all of the changes visisble
 			pygame.display.flip()
@@ -83,5 +97,6 @@ class LampMain():
 
 if __name__ == "__main__":
 	newGame = LampMain()
+	newGame.lamp = Lamp((300, 300), 'lamp.png')
 	newGame.MainLoop()
 
