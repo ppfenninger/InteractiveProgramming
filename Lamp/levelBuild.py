@@ -9,13 +9,16 @@ class Platform(pygame.sprite.Sprite):
 	# and x and y position
 
 	def __init__(self,topLeft=(100,100),width=20,height=20,color=(200,120,120)):
+		self.width = width
+		self.height = height
+
 
 		# Call the Sprite constructor from pygame
 		pygame.sprite.Sprite.__init__(self)
 
 		# creates a block image, this will later be replaced
 		# with code that loads a block image
-		self.image = pygame.Surface([width,height])
+		self.image = pygame.Surface([self.width, self.height])
 		self.image.fill(color)
 
 		#gets the rectangle object with image dimensions
@@ -23,3 +26,34 @@ class Platform(pygame.sprite.Sprite):
 		self.rect.x = topLeft[0]
 		self.rect.y = topLeft[1]
 
+	def buildGrid(self):
+	     [range(0,40),
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 [],
+		 range(0,40)]
