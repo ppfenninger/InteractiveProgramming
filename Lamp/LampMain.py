@@ -40,7 +40,7 @@ class LampMain():
 		self.background = self.background.convert()
 		self.background.fill((200,0,0))
 
-		
+		keyPressed = False
 		# add the platforms to the stage
 		self.constructStage()
 
@@ -49,10 +49,10 @@ class LampMain():
 		# and use background dimensions
 		waitScreen = text.Title(self.background, self.window)
 		waitScreen.titleScreen()
-
+		keyPressed = False
 		# continuously updates the game state
 		while 1:
-			time.sleep(0.001)
+			time.sleep(.001)
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					sys.exit()
@@ -61,13 +61,16 @@ class LampMain():
 					or (event.key == K_LEFT)
 					or (event.key == K_UP)
 					or (event.key == K_DOWN)):
-						self.lamp.MoveKeyDown(event.key)
+						if not keyPressed:
+							self.lamp.MoveKeyDown(event.key)
+							keyPressed = True
 				elif event.type == KEYUP:
 					if ((event.key == K_RIGHT)
 					or (event.key == K_LEFT)
 					or (event.key == K_UP)
 					or (event.key == K_DOWN)):
 						self.lamp.MoveKeyUp(event.key)
+						keyPressed = False
 												
 			self.lamp.update(self.platformGroup)
 			# updates the Surface that everything is displaying on

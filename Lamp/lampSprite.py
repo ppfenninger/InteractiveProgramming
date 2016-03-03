@@ -1,6 +1,7 @@
 import os, sys
 import pygame
 from pygame.locals import *
+import LampMain
 
 class Lamp(pygame.sprite.Sprite):
 	
@@ -64,3 +65,4 @@ class Lamp(pygame.sprite.Sprite):
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)
+		return (slef.xMove, self.yMove)
