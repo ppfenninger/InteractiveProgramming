@@ -17,7 +17,7 @@ class Lamp(pygame.sprite.Sprite):
 		self.rect.center = centerPoint
 		#sets the number of pixels we are going to move each time
 		self.xDist = 3
-		self.yDist = 3
+		self.yDist = 30
 		#initializes how much we are moving
 		self.xMove = 0
 		self.yMove = 0

@@ -10,7 +10,6 @@ import text
 from lampSprite import Lamp
 
 
-
 class LampMain():
 	"""This class initializes the game and contains the main loops of the game
 	"""
