@@ -7,7 +7,7 @@ import pygame
 from pygame.locals import *
 import levelBuild
 import text
-from lampSprite import Lamp
+import lampSprite
 import time
 
 
@@ -18,7 +18,7 @@ class LampMain():
 	def __init__(self, width=800,height=600):
 		"""Makes the window and displays it"""
 		# creates our lamp object
-		self.lamp = Lamp((300, 300), 'lamp.png')
+		self.lamp = lampSprite.Lamp((300, 300), 'lamp.png')
 
 		# initializes pygame
 		pygame.init()
@@ -30,6 +30,9 @@ class LampMain():
 
 		#creates the window
 		self.window = pygame.display.set_mode((self.width, self.height))
+
+		self.oneAgo = (0,0)
+		self.twoAgo = (0,0)
 
 
 	def MainLoop(self):

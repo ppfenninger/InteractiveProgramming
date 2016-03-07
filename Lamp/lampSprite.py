@@ -65,4 +65,4 @@ class Lamp(pygame.sprite.Sprite):
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)
-		return (slef.xMove, self.yMove)
+		return (self.xMove, self.yMove)
