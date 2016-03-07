@@ -8,7 +8,6 @@ class Lamp(pygame.sprite.Sprite):
 	def __init__(self, centerPoint, name):
 		# creates Sprite
 		pygame.sprite.Sprite.__init__(self)
-
 		fullname = os.path.join('images')
 		fullname = os.path.join(fullname, name)
 		image = pygame.image.load(fullname)
@@ -25,44 +24,47 @@ class Lamp(pygame.sprite.Sprite):
 		self.yMove = 0
 		self.canJump = True
 
+		# a list of the keys that are currently down
+		# 1, 2, 3, 4 represent right left up down respectively
+		self.keyDown = []
+
 	def MoveKeyDown(self, key):
-		
-		if (key == K_RIGHT):
-			self.xMove += self.xDist
-			self.yMove = 0
-		elif (key == K_LEFT):
-			self.xMove += -self.xDist
-			self.yMove = 0
-		elif (key == K_UP):
-			self.yMove += -self.yDist
-			self.xMove = 0
-		elif (key == K_DOWN):
-			self.yMove += self.yDist
-			self.xMove = 0
+		if self.keyDown == []:
+			if (key == K_RIGHT):
+				self.xMove += self.xDist
+				self.keyDown.append(1)
+			elif (key == K_LEFT):
+				self.xMove += -self.xDist
+				self.keyDown.append(2)
+			elif (key == K_UP):
+				self.yMove += -self.yDist
+				self.keyDown.append(3)
+			elif (key == K_DOWN):
+				self.yMove += self.yDist
+				self.keyDown.append(4)
 
 	def MoveKeyUp(self, key):
-		if (key == K_RIGHT):
-			if self.xMove != 0:
+		if self.keyDown != []:
+			if (key == K_RIGHT) and self.keyDown[0] == 1:
 				self.xMove += -self.xDist
-		elif (key == K_LEFT):
-			if self.xMove != 0:
+				self.keyDown.pop()
+			elif (key == K_LEFT) and self.keyDown[0] == 2:
 				self.xMove += self.xDist
-		elif (key == K_UP):
-			if self.yMove != 0:
+				self.keyDown.pop()
+			elif (key == K_UP) and self.keyDown[0] == 3:
 				self.yMove += self.yDist
-		elif (key == K_DOWN):
-			if self.yMove != 0:	
+				self.keyDown.pop()
+			elif (key == K_DOWN) and self.keyDown[0] == 4:
 				self.yMove += -self.yDist
+				self.keyDown.pop()
 
 	def update(self, platformGroup):
-		if pygame.sprite.spritecollide(self, platformGroup, False):
-			self.canJump = True
-		else:
-			self.canJump = False
+
 
 		if pygame.sprite.spritecollide(self, platformGroup, False):
 			self.rect.move_ip(-3*self.xMove, -3*self.yMove)
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)
-		return (slef.xMove, self.yMove)
+		return (self.xMove, self.yMove)
+

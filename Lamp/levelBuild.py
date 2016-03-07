@@ -1,7 +1,7 @@
 """loads and renders the level blocks"""
 
 import pygame
-
+import numpy as np
 
 class Platform(pygame.sprite.Sprite):
 	
