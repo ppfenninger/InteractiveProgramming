@@ -36,6 +36,10 @@ class LampMain():
 		self.oneAgo = (0,0)
 		self.twoAgo = (0,0)
 
+		# so we can track jumps
+		self.jumping = False
+		self.num = 0
+
 
 	def MainLoop(self):
 		"""The main loop of the game"""
@@ -69,7 +73,7 @@ class LampMain():
 						or (event.key == K_LEFT)
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
-							self.lamp.MoveKeyDown(event.key)		
+							self.lamp.MoveKeyDown(self, event.key)		
 					elif event.type == KEYUP:
 						if ((event.key == K_RIGHT)
 						or (event.key == K_LEFT)
@@ -78,7 +82,7 @@ class LampMain():
 							self.lamp.MoveKeyUp(event.key)
 						
 												
-			self.lamp.update(self.platformGroup, self.width, self.height)
+			self.lamp.update(self, self.platformGroup, self.width, self.height)
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
