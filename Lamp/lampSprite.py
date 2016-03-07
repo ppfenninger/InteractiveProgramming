@@ -28,17 +28,17 @@ class Lamp(pygame.sprite.Sprite):
 
 		
 	def MoveKeyDown(self, key):
+
 		if (key == K_RIGHT):
 			self.xMove += self.xDist
 		elif (key == K_LEFT):
 			self.xMove += -self.xDist
 		elif (key == K_UP):
 			self.press += 1
-			if self.press <= 1:
+			if self.press <= 4:
 				self.yMove += -self.yDist
 			else:
 				self.yMove = 0
-			print self.press
 		elif (key == K_DOWN):
 			self.yMove += self.yDist
 
@@ -61,7 +61,7 @@ class Lamp(pygame.sprite.Sprite):
 			self.yMove = 0
 		else:
 			if self.yMove == 0:
-				self.yMove += 1
+				self.yMove += 2
 
 		x = self.rect.centerx
 		if x > width:
