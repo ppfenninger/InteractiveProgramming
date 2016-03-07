@@ -54,8 +54,6 @@ class Lamp(pygame.sprite.Sprite):
 
 		if pygame.sprite.spritecollide(self, platformGroup, False):
 			self.rect.move_ip(self.xMove, -3*self.yMove)
-<<<<<<< HEAD
-=======
 
 		x = self.rect.centerx
 		if x > width:
@@ -66,8 +64,6 @@ class Lamp(pygame.sprite.Sprite):
 			diff = abs(x)
 			total = width + diff
 			self.rect.move_ip(total, 0)
-
->>>>>>> 7f41156f8fd35e3b28852aab28162a05e8db0919
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)

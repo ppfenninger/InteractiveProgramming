@@ -26,34 +26,50 @@ class Platform(pygame.sprite.Sprite):
 		self.rect.x = topLeft[0]
 		self.rect.y = topLeft[1]
 
-	def buildGrid(self):
-	     [np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40),
-		  np.zeros(40)]
+class Construct(object):	
+	
+	def __init__(self):
+
+		def zero(n):
+			temp = np.zeros(n).tolist()
+			return temp
+		def one(n):
+			temp = np.ones(n).tolist()
+			return temp
+
+		self.grid = [zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(9) + one(2) + zero(18) + one(2) + zero(9),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(4) + one(4) + zero(24) + one(4) + zero(4),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(10) + one(5) + zero(10) + one(5) + zero(10),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				one(40/5) + zero(40/5) + one(40/5) + zero(40/5) + one(40/5),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				one(40/3) + zero(40/3) + one(40/3 + 1),
+				zero(40),
+				zero(40),
+				zero(40),
+				zero(40),
+				one(40)]
+
+		
+
+
+
+
