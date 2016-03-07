@@ -32,37 +32,28 @@ class Lamp(pygame.sprite.Sprite):
 		if self.keyDown == []:
 			if (key == K_RIGHT):
 				self.xMove += self.xDist
-				self.keyDown.append(1)
 			elif (key == K_LEFT):
 				self.xMove += -self.xDist
-				self.keyDown.append(2)
 			elif (key == K_UP):
 				self.yMove += -self.yDist
-				self.keyDown.append(3)
 			elif (key == K_DOWN):
 				self.yMove += self.yDist
-				self.keyDown.append(4)
 
 	def MoveKeyUp(self, key):
-		if self.keyDown != []:
-			if (key == K_RIGHT) and self.keyDown[0] == 1:
-				self.xMove += -self.xDist
-				self.keyDown.pop()
-			elif (key == K_LEFT) and self.keyDown[0] == 2:
-				self.xMove += self.xDist
-				self.keyDown.pop()
-			elif (key == K_UP) and self.keyDown[0] == 3:
-				self.yMove += self.yDist
-				self.keyDown.pop()
-			elif (key == K_DOWN) and self.keyDown[0] == 4:
-				self.yMove += -self.yDist
-				self.keyDown.pop()
+		if (key == K_RIGHT):
+			self.xMove += -self.xDist
+		elif (key == K_LEFT):
+			self.xMove += self.xDist
+		elif (key == K_UP):
+			self.yMove += self.yDist
+		elif (key == K_DOWN):
+			self.yMove += -self.yDist
 
 	def update(self, platformGroup):
 
 
 		if pygame.sprite.spritecollide(self, platformGroup, False):
-			self.rect.move_ip(-3*self.xMove, -3*self.yMove)
+			self.rect.move_ip(self.xMove, -3*self.yMove)
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)

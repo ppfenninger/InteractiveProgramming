@@ -50,28 +50,26 @@ class LampMain():
 		# and use background dimensions
 		waitScreen = text.Title(self.background, self.window)
 		waitScreen.titleScreen()
-		keyPressed = False
 		# continuously updates the game state
 		while 1:
 			time.sleep(.001)
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					sys.exit()
-				elif event.type == KEYDOWN:
-					if ((event.key == K_RIGHT)
-					or (event.key == K_LEFT)
-					or (event.key == K_UP)
-					or (event.key == K_DOWN)):
-						if not keyPressed:
-							self.lamp.MoveKeyDown(event.key)
-							keyPressed = True
-				elif event.type == KEYUP:
-					if ((event.key == K_RIGHT)
-					or (event.key == K_LEFT)
-					or (event.key == K_UP)
-					or (event.key == K_DOWN)):
-						self.lamp.MoveKeyUp(event.key)
-						keyPressed = False
+			if not pygame.sprite.spritecollide(self.lamp, self.platformGroup, False):
+				for event in pygame.event.get():
+					if event.type == pygame.QUIT:
+						sys.exit()
+					elif event.type == KEYDOWN:
+						if ((event.key == K_RIGHT)
+						or (event.key == K_LEFT)
+						or (event.key == K_UP)
+						or (event.key == K_DOWN)):
+							self.lamp.MoveKeyDown(event.key)		
+					elif event.type == KEYUP:
+						if ((event.key == K_RIGHT)
+						or (event.key == K_LEFT)
+						or (event.key == K_UP)
+						or (event.key == K_DOWN)):
+							self.lamp.MoveKeyUp(event.key)
+						
 												
 			self.lamp.update(self.platformGroup)
 			# updates the Surface that everything is displaying on
