@@ -77,7 +77,7 @@ class LampMain():
 						self.lamp.MoveKeyUp(event.key)
 						keyPressed = False
 												
-			self.lamp.update(self.platformGroup)
+			self.lamp.update(self.platformGroup, self.width, self.height)
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)

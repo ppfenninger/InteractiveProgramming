@@ -58,11 +58,22 @@ class Lamp(pygame.sprite.Sprite):
 				self.yMove += -self.yDist
 				self.keyDown.pop()
 
-	def update(self, platformGroup):
+	def update(self, platformGroup, width, height):
 
 
 		if pygame.sprite.spritecollide(self, platformGroup, False):
-			self.rect.move_ip(-3*self.xMove, -3*self.yMove)
+			self.rect.move_ip(self.xMove, -3*self.yMove)
+
+		x = self.rect.centerx
+		if x > width:
+			diff = x - width
+			total = -(width + diff)
+			self.rect.move_ip(total, 0)
+		elif x < 0:
+			diff = abs(x)
+			total = width + diff
+			self.rect.move_ip(total, 0)
+
 
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)
