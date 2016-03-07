@@ -5,10 +5,12 @@
 import os, sys
 import pygame
 from pygame.locals import *
+import lampSprite
 import levelBuild
 import text
 import lampSprite
 import time
+import numpy
 
 
 class LampMain():
