@@ -59,11 +59,10 @@ class LampMain():
 		waitScreen = text.Title(self.background, self.window)
 		waitScreen.titleScreen()
 		# continuously updates the game state
-
+		pygame.key.set_repeat(3, 50)
 
 		while 1:
-			time.sleep(.001)
-			pygame.key.set_repeat(0, 0)
+			time.sleep(.005)
 			if not pygame.sprite.spritecollide(self.lamp, self.platformGroup, False):
 				for event in pygame.event.get():
 					if event.type == pygame.QUIT:
@@ -73,7 +72,7 @@ class LampMain():
 						or (event.key == K_LEFT)
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
-							self.lamp.MoveKeyDown(self, event.key)		
+							self.lamp.MoveKeyDown(event.key)		
 					elif event.type == KEYUP:
 						if ((event.key == K_RIGHT)
 						or (event.key == K_LEFT)
