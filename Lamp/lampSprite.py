@@ -53,9 +53,8 @@ class Lamp(pygame.sprite.Sprite):
 		if (key == K_DOWN):
 			self.yMove = 0
 
-	def update(self, platformGroup, width, height):
-
-
+	def update(self, other, platformGroup, width, height):
+	
 		if pygame.sprite.spritecollide(self, platformGroup, False):
 			self.rect.move_ip(self.xMove, -self.yMove)
 			self.yMove = 0
@@ -63,6 +62,8 @@ class Lamp(pygame.sprite.Sprite):
 			if self.yMove == 0:
 				self.yMove += 2
 
+
+		# go off one edge, appear on the other
 		x = self.rect.centerx
 		if x > width:
 			diff = x - width
