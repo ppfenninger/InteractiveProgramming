@@ -2,6 +2,7 @@ import os, sys
 import pygame
 from pygame.locals import *
 import LampMain
+import time
 
 class Lamp(pygame.sprite.Sprite):
 	
@@ -18,44 +19,50 @@ class Lamp(pygame.sprite.Sprite):
 		self.rect.center = centerPoint
 		#sets the number of pixels we are going to mossve each time
 		self.xDist = 1
-		self.yDist = 1
+		self.yDist = 2
 		#initializes how much we are moving
 		self.xMove = 0
 		self.yMove = 0
 		self.canJump = True
+		self.press = 0
 
-		# a list of the keys that are currently down
-		# 1, 2, 3, 4 represent right left up down respectively
-		self.keyDown = []
-
+		
 	def MoveKeyDown(self, key):
-		if self.keyDown == []:
-			if (key == K_RIGHT):
-				self.xMove += self.xDist
-			elif (key == K_LEFT):
-				self.xMove += -self.xDist
-			elif (key == K_UP):
+		if (key == K_RIGHT):
+			self.xMove += self.xDist
+		elif (key == K_LEFT):
+			self.xMove += -self.xDist
+		elif (key == K_UP):
+			self.press += 1
+			if self.press <= 1:
 				self.yMove += -self.yDist
-			elif (key == K_DOWN):
-				self.yMove += self.yDist
+			else:
+				self.yMove = 0
+			print self.press
+		elif (key == K_DOWN):
+			self.yMove += self.yDist
 
 	def MoveKeyUp(self, key):
 		if (key == K_RIGHT):
-			self.xMove += -self.xDist
+			self.xMove = 0
 		elif (key == K_LEFT):
-			self.xMove += self.xDist
+			self.xMove = 0
 		elif (key == K_UP):
-			self.yMove += self.yDist
+			self.yMove = 0
+			self.press = 0
 		elif (key == K_DOWN):
-			self.yMove += -self.yDist
+			self.yMove = 0
 
 	def update(self, platformGroup, width, height):
 
 
 		if pygame.sprite.spritecollide(self, platformGroup, False):
 			self.rect.move_ip(self.xMove, -3*self.yMove)
-<<<<<<< HEAD
-=======
+			self.yMove = 0
+		else:
+			if self.yMove == 0:
+				self.yMove += 1
+
 
 		x = self.rect.centerx
 		if x > width:
@@ -66,9 +73,9 @@ class Lamp(pygame.sprite.Sprite):
 			diff = abs(x)
 			total = width + diff
 			self.rect.move_ip(total, 0)
-
->>>>>>> 7f41156f8fd35e3b28852aab28162a05e8db0919
-
 		else:
 			self.rect.move_ip(self.xMove,self.yMove)
-		return (self.xMove, self.yMove)
+
+		# if self.press:
+		# 	self.yMove = 0
+		# 	self.press = False
