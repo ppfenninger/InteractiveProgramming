@@ -8,6 +8,7 @@ from pygame.locals import *
 import lampSprite
 import levelBuild
 import text
+import lampSprite
 import time
 import numpy
 
@@ -31,6 +32,9 @@ class LampMain():
 
 		#creates the window
 		self.window = pygame.display.set_mode((self.width, self.height))
+
+		self.oneAgo = (0,0)
+		self.twoAgo = (0,0)
 
 
 	def MainLoop(self):
@@ -71,7 +75,7 @@ class LampMain():
 							self.lamp.MoveKeyUp(event.key)
 						
 												
-			self.lamp.update(self.platformGroup)
+			self.lamp.update(self.platformGroup, self.width, self.height)
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
