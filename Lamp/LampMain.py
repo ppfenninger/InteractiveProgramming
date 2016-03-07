@@ -20,7 +20,7 @@ class LampMain():
 	def __init__(self, width=800,height=600):
 		"""Makes the window and displays it"""
 		# creates our lamp object
-		self.lamp = lampSprite.Lamp((300, 300), 'lamp.png')
+		self.lamp = lampSprite.Lamp((400, 550), 'lamp.png')
 
 		# initializes pygame
 		pygame.init()
@@ -98,9 +98,13 @@ class LampMain():
 		# creates the Group of platform Sprites. Group is like a list of Sprites
 		self.platformGroup = pygame.sprite.Group()
 
-		for x in xrange(blocknumX):
-			for y in xrange(blocknumY):
-				if x ==1 or y==1 or x==blocknumX-2 or y==blocknumY-2:
+		constructor = levelBuild.Construct()
+		newGrid = constructor.grid
+
+
+		for y in xrange(len(newGrid)):
+			for x in xrange(len(newGrid[y])):
+				if newGrid[y][x] == 1:
 					tempPlat = levelBuild.Platform((x*BLOCK_WIDTH,y*BLOCK_WIDTH),BLOCK_WIDTH,BLOCK_WIDTH)
 					self.platformGroup.add(tempPlat)
 
