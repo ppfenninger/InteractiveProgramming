@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 
 if not pygame.font: print "You don't have any fonts"
-from LampMain import LampMain
+import LampMain
 
 class Title():
 
@@ -71,5 +71,5 @@ class GameOver():
 					elif event.type == KEYUP:
 						if event.key == K_RETURN:
 							going = True
-							newGame = LampMain()
+							newGame = LampMain.LampMain()
 							newGame.MainLoop()
