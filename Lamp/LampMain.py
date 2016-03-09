@@ -11,6 +11,7 @@ import text
 import lampSprite
 import time
 import numpy
+import house
 import rainSprite
 
 
@@ -61,6 +62,7 @@ class LampMain():
 		waitScreen = text.Title(self.background, self.window)
 		waitScreen.titleScreen()
 		# continuously updates the game state
+		#makes it so there is are keydown events when a key is held and pressed
 		pygame.key.set_repeat(3, 50)
 
 
@@ -92,10 +94,25 @@ class LampMain():
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
 							self.lamp.MoveKeyUp(event.key)
-						
-												
-			self.lamp.update(self.platformGroup, self.width, self.height)
 
+			# checks for collisions with the house and hail
+			if pygame.sprite.spritecollide(self.lamp, self.homeGroup, False):
+				self.background2 = pygame.Surface(self.window.get_size())
+				self.background2 = self.background2.convert()
+				self.background2.fill((0,0,0))
+				self.window.blit(self.background2, (0,0))
+				end = text.Title(self.background, self.window)
+				end.endScreen()
+			if pygame.sprite.spritecollide(self.lamp, self.hailGroup, False):
+				self.background2 = pygame.Surface(self.window.get_size())
+				self.background2 = self.background2.convert()
+				self.background2.fill((0,0,0))
+				self.window.blit(self.background2, (0,0))
+				gameOverScreen = text.GameOver(self.background, self.window)
+				gameOverScreen.gameover()
+									
+			self.lamp.update(self.platformGroup, self.width, self.height)			
+												
 
 			# updates the rain and hail
 			for raindrop in self.rainGroup.sprites():
@@ -107,9 +124,10 @@ class LampMain():
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
 			self.window.blit(self.lamp.image, self.lamp.rect)
+			self.window.blit(self.home.image, self.home.rect)
+
 			self.rainGroup.draw(self.window)
 			self.hailGroup.draw(self.window)
-
 			# refreshes the display and makes all of the changes visisble
 			pygame.display.flip()
 
@@ -127,6 +145,9 @@ class LampMain():
 		constructor = levelBuild.Construct()
 		newGrid = constructor.grid
 
+		self.home = house.House((30, 560), 'house.png')
+		self.homeGroup = pygame.sprite.Group()
+		self.homeGroup.add(self.home)
 
 		for y in xrange(len(newGrid)):
 			for x in xrange(len(newGrid[y])):

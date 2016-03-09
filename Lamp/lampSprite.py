@@ -61,8 +61,6 @@ class Lamp(pygame.sprite.Sprite):
 		else:
 			if self.yMove == 0:
 				self.yMove += 2
-
-
 		# go off one edge, appear on the other
 		x = self.rect.centerx
 		if x > width:
