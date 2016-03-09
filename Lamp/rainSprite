@@ -1,0 +1,20 @@
+import os, sys
+import pygame
+from pygame.locals import *
+import LampMain
+import time
+import random
+
+class rainSprite(pygame.sprite.Sprite):
+
+	def __init__(self, centerpoint, width=2,height=5,color=(0,0,255)):
+
+		# Call the Sprite constructor from pygame
+		pygame.sprite.Sprite.__init__(self)
+
+		# creates a rain block
+		self.image = pygame.Surface([self.width, self.height])
+		self.image.fill(color)
+
+	def update(self):
+		

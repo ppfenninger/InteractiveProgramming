@@ -16,8 +16,7 @@ class Platform(pygame.sprite.Sprite):
 		# Call the Sprite constructor from pygame
 		pygame.sprite.Sprite.__init__(self)
 
-		# creates a block image, this will later be replaced
-		# with code that loads a block image
+		# creates a block image
 		self.image = pygame.Surface([self.width, self.height])
 		self.image.fill(color)
 

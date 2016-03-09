@@ -53,7 +53,7 @@ class Lamp(pygame.sprite.Sprite):
 		if (key == K_DOWN):
 			self.yMove = 0
 
-	def update(self, other, platformGroup, width, height):
+	def update(self, platformGroup, width, height):
 	
 		if pygame.sprite.spritecollide(self, platformGroup, False):
 			self.rect.move_ip(self.xMove, -self.yMove)
