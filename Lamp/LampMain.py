@@ -50,7 +50,7 @@ class LampMain():
 		# creates the backgorund
 		self.background = pygame.Surface(self.window.get_size())
 		self.background = self.background.convert()
-		self.background.fill((200,0,0))
+		self.background.fill((100,15,15))
 
 		keyPressed = False
 		# add the platforms to the stage
@@ -115,6 +115,9 @@ class LampMain():
 			# updates the rain and hail
 			for raindrop in self.rainGroup.sprites():
 				raindrop.update()
+				if raindrop.rect.center[1] > self.height + 30:
+					self.rainGroup.remove(raindrop)
+
 			for hail in self.hailGroup.sprites():
 				hail.update()
 
@@ -143,7 +146,7 @@ class LampMain():
 		constructor = levelBuild.Construct()
 		newGrid = constructor.grid
 
-		self.home = house.House((30, 560), 'house.png')
+		self.home = house.House((400, 25), 'house.png')
 		self.homeGroup = pygame.sprite.Group()
 		self.homeGroup.add(self.home)
 

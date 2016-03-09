@@ -2,7 +2,7 @@
 be added """
 import pygame
 from pygame.locals import *
-
+import os, sys
 if not pygame.font: print "You don't have any fonts"
 import LampMain
 
@@ -101,6 +101,6 @@ class GameOver():
 					elif event.type == KEYUP:
 						if event.key == K_RETURN:
 							going = True
-							# newGame = LampMain.LampMain()
-							# newGame.MainLoop()
+							newGame = LampMain.LampMain()
+							newGame.MainLoop()
 
