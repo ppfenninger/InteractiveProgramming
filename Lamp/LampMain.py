@@ -72,7 +72,7 @@ class LampMain():
 						or (event.key == K_LEFT)
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
-							self.lamp.MoveKeyDown(event.key)		
+							self.lamp.MoveKeyDown()		
 					elif event.type == KEYUP:
 						if ((event.key == K_RIGHT)
 						or (event.key == K_LEFT)
