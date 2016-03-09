@@ -11,6 +11,7 @@ import text
 import lampSprite
 import time
 import numpy
+import house
 
 
 class LampMain():
@@ -59,6 +60,7 @@ class LampMain():
 		waitScreen = text.Title(self.background, self.window)
 		waitScreen.titleScreen()
 		# continuously updates the game state
+		#makes it so there is are keydown events when a key is held and pressed
 		pygame.key.set_repeat(3, 50)
 
 		while 1:
@@ -79,13 +81,20 @@ class LampMain():
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
 							self.lamp.MoveKeyUp(event.key)
-						
-												
+			if pygame.sprite.spritecollide(self.lamp, self.homeGroup, False):
+				self.blackScreen = pygame.Surface(self.window.get_size())
+				self.blackScreen = self.blackScreen.convert()
+				self.blackScreen.fill((0,0,0))
+				end = text.Title(self.blackScreen, self.window)
+				end.endScreen()
+									
 			self.lamp.update(self, self.platformGroup, self.width, self.height)
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
 			self.window.blit(self.lamp.image, self.lamp.rect)
+			self.window.blit(self.home.image, self.home.rect)
+
 
 			# refreshes the display and makes all of the changes visisble
 			pygame.display.flip()
@@ -104,6 +113,9 @@ class LampMain():
 		constructor = levelBuild.Construct()
 		newGrid = constructor.grid
 
+		self.home = house.House((30, 560), 'house.png')
+		self.homeGroup = pygame.sprite.Group()
+		self.homeGroup.add(self.home)
 
 		for y in xrange(len(newGrid)):
 			for x in xrange(len(newGrid[y])):
