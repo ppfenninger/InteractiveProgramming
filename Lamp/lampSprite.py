@@ -19,7 +19,7 @@ class Lamp(pygame.sprite.Sprite):
 		self.rect.center = centerPoint
 		#sets the number of pixels we are going to mossve each time
 		self.xDist = 1
-		self.yDist = 2
+		self.yDist = 1
 		#initializes how much we are moving
 		self.xMove = 0
 		self.yMove = 0
@@ -35,7 +35,7 @@ class Lamp(pygame.sprite.Sprite):
 			self.xMove = -self.xDist
 		if (keys[K_UP]):
 			self.press += 1
-			if self.press <= 4:
+			if self.press <= 6:
 				self.yMove += -self.yDist
 			else:
 				self.yMove = 0

@@ -11,6 +11,7 @@ import text
 import lampSprite
 import time
 import numpy
+import rainSprite
 
 
 class LampMain():
@@ -30,15 +31,16 @@ class LampMain():
 		self.width = width
 		self.height = height
 
-		#creates the window
+		# creates the window
 		self.window = pygame.display.set_mode((self.width, self.height))
 
-		self.oneAgo = (0,0)
-		self.twoAgo = (0,0)
+		# the raindrop and hail groups
+		self.rainGroup = pygame.sprite.Group()
+		self.hailGroup = pygame.sprite.Group()
 
-		# so we can track jumps
-		self.jumping = False
-		self.num = 0
+		# so we don't have that much hail
+		self.hailNum = 0
+
 
 
 	def MainLoop(self):
@@ -61,7 +63,18 @@ class LampMain():
 		# continuously updates the game state
 		pygame.key.set_repeat(3, 50)
 
+
 		while 1:
+
+			self.hailNum += 1
+			if self.hailNum % 20 == 0:
+				temp = rainSprite.Hail()
+				self.hailGroup.add(temp) 
+
+
+			temp = rainSprite.Rain()
+			self.rainGroup.add(temp)
+
 			time.sleep(.005)
 			if not pygame.sprite.spritecollide(self.lamp, self.platformGroup, False):
 				for event in pygame.event.get():
@@ -81,11 +94,21 @@ class LampMain():
 							self.lamp.MoveKeyUp(event.key)
 						
 												
-			self.lamp.update(self, self.platformGroup, self.width, self.height)
+			self.lamp.update(self.platformGroup, self.width, self.height)
+
+
+			# updates the rain and hail
+			for raindrop in self.rainGroup.sprites():
+				raindrop.update()
+			for hail in self.hailGroup.sprites():
+				hail.update()
+
 			# updates the Surface that everything is displaying on
 			self.window.blit(self.background, (0,0))
 			self.platformGroup.draw(self.window)
 			self.window.blit(self.lamp.image, self.lamp.rect)
+			self.rainGroup.draw(self.window)
+			self.hailGroup.draw(self.window)
 
 			# refreshes the display and makes all of the changes visisble
 			pygame.display.flip()
