@@ -101,10 +101,7 @@ class LampMain():
 				end = text.Title(self.blackScreen, self.window)
 				end.endScreen()
 									
-			self.lamp.update(self.platformGroup, self.width, self.height)			
-												
 			self.lamp.update(self.platformGroup, self.width, self.height)
-
 
 			# updates the rain and hail
 			for raindrop in self.rainGroup.sprites():
