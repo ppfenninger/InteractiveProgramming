@@ -94,15 +94,24 @@ class LampMain():
 						or (event.key == K_UP)
 						or (event.key == K_DOWN)):
 							self.lamp.MoveKeyUp(event.key)
-			if pygame.sprite.spritecollide(self.lamp, self.homeGroup, False):
-				self.blackScreen = pygame.Surface(self.window.get_size())
-				self.blackScreen = self.blackScreen.convert()
-				self.blackScreen.fill((0,0,0))
-				end = text.Title(self.blackScreen, self.window)
-				end.endScreen()
-									
-			self.lamp.update(self.platformGroup, self.width, self.height)
 
+			# checks for collisions with the house and hail
+			if pygame.sprite.spritecollide(self.lamp, self.homeGroup, False):
+				self.background2 = pygame.Surface(self.window.get_size())
+				self.background2 = self.background2.convert()
+				self.background2.fill((0,0,0))
+				self.window.blit(self.background2, (0,0))
+				end = text.Title(self.background, self.window)
+				end.endScreen()
+			if pygame.sprite.spritecollide(self.lamp, self.hailGroup, False):
+				self.background2 = pygame.Surface(self.window.get_size())
+				self.background2 = self.background2.convert()
+				self.background2.fill((0,0,0))
+				self.window.blit(self.background2, (0,0))
+				gameOverScreen = text.GameOver(self.background, self.window)
+				gameOverScreen.gameover()
+
+			self.lamp.update(self.platformGroup, self.width, self.height)
 			# updates the rain and hail
 			for raindrop in self.rainGroup.sprites():
 				raindrop.update()

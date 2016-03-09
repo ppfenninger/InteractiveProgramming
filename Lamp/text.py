@@ -65,6 +65,9 @@ class Title():
 					elif event.type == KEYUP:
 						if event.key == K_RETURN:
 							going = True
+							newGame = LampMain.LampMain()
+							newGame.MainLoop()
+
 		
 class GameOver():
 	def __init__(self, background, window):
